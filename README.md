@@ -3,5 +3,5 @@ Team Members:
 
 David Lee - A01079202 - GitHub: Lee-David-88<br>
 Kyle Bulalakaw - <br>
-Saida Song - <br>
+Saida Song - A01088305 - GitHub: Saida-Song <br>
 Silvana Kalliny - A01207937 - GitHub: Silvanakalliny
