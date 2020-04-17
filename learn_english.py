@@ -23,7 +23,7 @@ def main():
     running = True
     while running:
         menu_list = ["Check a word", "Add a word", "Add words",
-                     "Remove a word", "Print your word list",
+                     "Remove a word", "Remove words",
                      "Print the word list", "Print the word list with definition",
                      "Test your vocabulary"]
 
@@ -36,13 +36,13 @@ def main():
         elif choice == "1":
             pass
         elif choice == "2":
-            new_word = input("Add a new word: ")
-            vocabulary.add_a_word(new_word)
-            pass
+            add_word = input("Add a new word: ")
+            vocabulary.add_a_word(add_word)
         elif choice == "3":
             pass
         elif choice == "4":
-            pass
+            delete_word = input("Remove a word: ")
+            vocabulary.remove_a_word(delete_word)
         elif choice == "5":
             pass
         elif choice == "6":
