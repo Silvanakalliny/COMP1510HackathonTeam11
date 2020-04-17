@@ -1,4 +1,3 @@
-from vocabulary import Vocabulary
 import time
 
 
@@ -18,7 +17,7 @@ def study_time(func) -> float:
 
 @study_time
 def main():
-    vocabulary = Vocabulary()
+    print("Welcome to Learn English App!")
     running = True
     while running:
         menu_list = ["Check a word", "Add a word", "Add words",
@@ -26,17 +25,18 @@ def main():
                      "Print the word list", "Print the word list with definition",
                      "Test your vocabulary"]
 
-        choice = user_input(menu_list,
-                            "Welcome to Learn English App!",
-                            "What would you like to do (Type 'quit' to exit the application): ")
+        for i, options in enumerate(menu_list, 1):
+            print("%d. %s" % (i, options))
+
+        # user must input 1-8 or type quit to exit
+        choice = input("Type 'quit' to exit the application\n").strip().lower()
 
         if choice == "quit":
             running = False
         elif choice == "1":
             pass
         elif choice == "2":
-            new_word = input("Add a new word: ")
-            vocabulary.add_a_word(new_word)
+            pass
         elif choice == "3":
             pass
         elif choice == "4":
@@ -44,29 +44,13 @@ def main():
         elif choice == "5":
             pass
         elif choice == "6":
-            if len(vocabulary.sort_words()) == 0:
-                print("\nYour list is empty! Add some words to your list first!")
-            else:
-                print("\nHere is your word list")
-                print_list(vocabulary.sort_words())
+            pass
         elif choice == "7":
             pass
         elif choice == "8":
             pass
         else:
             print("Invalid Choice!")
-
-
-def print_list(a_list):
-    for i, items in enumerate(a_list, 1):
-        print("%d. %s" % (i, items))
-
-
-def user_input(item_list, result, input_string) -> str:
-    print("\n" + "-" * 50)
-    print("\n%s\n" % result)
-    print_list(item_list)
-    return input("\n%s" % input_string)
 
 
 main()
