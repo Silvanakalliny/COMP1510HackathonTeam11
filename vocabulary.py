@@ -20,7 +20,6 @@ class Vocabulary:
         return sorted(list(self.__words))
 
     def __str__(self):
-        print([word for word in list(self.__words)])
         return f"Here are the words in the vocabulary list: {[word for word in list(self.__words)]}"
 
     def __repr__(self):
