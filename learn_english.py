@@ -1,7 +1,18 @@
+"""Main module for vocabulary program. Contains functions for user interface."""
+
 import time
+import vocabulary
 
 
 def study_time(func) -> float:
+    """
+    Print the time spent from start of app to when the user quits.
+
+    :param func: a function
+    :precondition: this function is wrapped around a function requiring user input
+    :postcondition: prints the time user spent using program, and returns time in seconds as a float
+    :return: time in seconds as a floating point number
+    """
     def wrapper_timer(*args, **kwargs):
         start_time = time.perf_counter()
         func(*args, **kwargs)
@@ -17,6 +28,7 @@ def study_time(func) -> float:
 
 @study_time
 def main():
+    """Run the vocabulary program."""
     print("Welcome to Learn English App!")
     running = True
     while running:
