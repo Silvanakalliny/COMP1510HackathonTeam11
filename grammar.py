@@ -43,13 +43,13 @@ def grammar_test():
     test_type = ["capitals", "verbs", "present simple mc"]
     chosen_difficulty = difficulty[difficulty_input - 1]
     chosen_test = test_type[test_type_input - 1]
-    score = 0
-    run_test(chosen_difficulty, chosen_test, score)
+    score = run_test(chosen_difficulty, chosen_test)
     possible_score = len(chosen_difficulty[chosen_test]["questions"].keys())
     print(f"Your final score was {score} out of a possible {possible_score}.")
 
 
-def run_test(level, test, score):
+def run_test(level, test):
+    score = 0
     questions = level[test]["questions"].keys()
     test_description = level[test]["description"]
     print("\n{}\n".format(test_description))
@@ -63,11 +63,14 @@ def run_test(level, test, score):
         user_answer = input().strip().lower()
         remove_punctuation(user_answer)
         if test == "capitals":
-            check_answer_capitals(level, question, user_answer, score)
+            correct = check_answer_capitals(level, question, user_answer)
         elif test == "verbs":
-            check_answer_verbs(level, question, user_answer, score)
+            correct = check_answer_verbs(level, question, user_answer)
         else:
-            check_answer_present_simple(level, question, user_answer, score)
+            correct = check_answer_present_simple(level, question, user_answer)
+        if correct:
+            score += 1
+    return score
 
 
 def remove_punctuation(answer):
@@ -77,16 +80,17 @@ def remove_punctuation(answer):
             answer = answer.replace(marker, "")
 
 
-def check_answer_capitals(level, question, answer, score):
+def check_answer_capitals(level, question, answer):
     correct_answer = level["capitals"]["questions"][question]
     if answer == correct_answer:
         print("Correct!")
-        score += 1
+        return True
     else:
         print(f"Wrong answer.The correct answer is {correct_answer}.")
+        return False
 
 
-def check_answer_verbs(level, question, answer, score):
+def check_answer_verbs(level, question, answer):
     possible_answers = ["Correct", "Incorrect"]
     correct_answer = level["verbs"]["questions"][question]
     answer = int(answer)
@@ -94,21 +98,23 @@ def check_answer_verbs(level, question, answer, score):
         raise ValueError
     elif possible_answers[answer - 1] == correct_answer:
         print("Correct!")
-        score += 1
+        return True
     else:
         print(f"Wrong answer.The correct answer is {correct_answer}.")
+        return False
 
 
-def check_answer_present_simple(level, question, answer, score):
+def check_answer_present_simple(level, question, answer):
     correct_answer = level["present simple mc"]["questions"][question][0]
     given_answer = level["present simple mc"]["questions"][question][1][int(answer)-1]
     if int(answer) != 1 and int(answer) != 2 and int(answer) != 3:
         raise ValueError
     elif given_answer == correct_answer:
         print("Correct!")
-        score += 1
+        return True
     else:
         print(f"Wrong answer.The correct answer is {correct_answer}.")
+        return False
 
 
 grammar_test()
