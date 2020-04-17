@@ -54,7 +54,7 @@ def test_yourself(user_class: vocabulary):
             delete_or_not = input(f"Delete \"{the_word}\" from your vocabulary sheet? ('Y'-yes. press 'Enter' to pass)")
             # Delete the word from the vocabulary sheet
             if delete_or_not.strip().lower() == "y":
-                pass
+                user_class.remove_a_word(the_word)
         # If the answer is wrong, tell the user
         else:
             print(f"Wrong. The answer is {the_word}\n")
