@@ -3,6 +3,7 @@ import random
 import re
 import itertools
 import vocabulary
+import doctest
 
 
 def main():
@@ -10,6 +11,18 @@ def main():
 
 
 def definition_and_example(word: str) -> tuple or str:
+    """
+    Return the definition and an example of the word.
+
+    Computational thinking: I used Algorithms and Automation to automatically call a request from dictionary API.
+    :precondition: must be a string has a meaning
+    :postcondition: return the definition and an example sentence of the word
+    :raise requests.exceptions.HTTPError: if the word is not in the dictionary
+    :param word: must be a string has a meaning
+    :return: the definition and an example sentence of the word
+
+    Can't do doctest and unittest because it's API related
+    """
     # ID and KEY are needed for authentication
     my_id = "67421323"
     my_key = "427d2d5a8f8aab43d83284acf09cfa3f"
@@ -33,6 +46,18 @@ def definition_and_example(word: str) -> tuple or str:
 
 
 def test_yourself(user_class: vocabulary):
+    """
+    Test the user with his or her vocabulary
+
+    Computational thinking: I used Decomposition to break the task down to smaller tasks
+    :precondition: user_class must be a vocabulary
+    :postcondition: test the user's vocabulary by words in the user's vocabulary sheet
+    :raise AttributeError: if the parameter is not a vocabulary
+    :param user_class: must be a vocabulary
+    :return: A test to test the user's vocabulary
+
+    Can't do doctest and unittest because it's API related
+    """
     # Make a counter of the number of question
     number_of_question = itertools.count(1)
     # Make a new list of vocabulary sheet as the question list
@@ -61,6 +86,18 @@ def test_yourself(user_class: vocabulary):
 
 
 def print_word_information(question_list: list, question_number: int) -> str:
+    """
+    Return the information of a randomly picked word.
+
+    Computational thinking: I used Pattern Matching to find the similarity between information I wanted
+    :precondition: question_list must be a list with strings, question_number must be a positive integer
+    :postcondition: return the information of a randomly picked word
+    :param question_list: must be a list with strings
+    :param question_number: must be a positive integer
+    :return: a randomly picked word from the question list
+
+    Can't do doctest and unittest because it's API related
+    """
     # Randomly pick a word from the question list
     the_word = random.choice(question_list)
     # Seek the example sentence of the word
@@ -73,6 +110,28 @@ def print_word_information(question_list: list, question_number: int) -> str:
 
 
 def regex_check(word: str, user_input: str) -> bool:
+    """
+    Check if the answer is correct.
+
+    Computational thinking: I used Item Matching to match the word by using regular expression.
+    :precondition: both parameters must be strings
+    :postcondition: Check if the user input matches the word
+    :param word: must be a string
+    :param user_input: must be a string
+    :raise TypeError: if any of both parameters are not a string
+    :return: True if matches else False
+
+    >>> regex_check('', '')
+    True
+    >>> regex_check(' ', ' ')
+    True
+    >>> regex_check('1', '1')
+    True
+    >>> regex_check('True', 'True')
+    True
+    >>> regex_check('True', 'ture')
+    False
+    """
     # Check the answer with regular expression
     regex_word = re.compile(f"^{word}$")
     match_word = regex_word.search(user_input)
