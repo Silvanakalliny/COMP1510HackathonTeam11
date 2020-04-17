@@ -1,4 +1,5 @@
 def grammar_questions():
+    # Questions taken from https://www.esl-lounge.com/student/grammar-exercises-beginner.php
     question_options = {"capitals": {"description": "Find and type in the word that is not properly capitalized (either missing a capital "
             "where there should be one, or containing a capital letter that should not be there.)",
                          "questions": {"We can go and visit you in the Autumn, possibly September but definitely before Christmas.":
