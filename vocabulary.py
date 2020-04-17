@@ -1,28 +1,76 @@
 class Vocabulary:
     def __init__(self):
+        """Initialize a new Vocabulary object."""
         self.__words = set()
 
-    def add_a_word(self, new_word):
+    def add_a_word(self, new_word: str):
+        """
+        Add a word to the words set.
+
+        :param new_word: a string of a valid word
+        :precondition: new_word exists in Oxford dictionary API
+        :postcondition: word is added to to this instance's __words set
+        """
         self.__words.add(new_word.lower().strip())
 
-    def add_words(self, *new_words):
+    def add_words(self, *new_words: str):  # will need to add code in main for splitting input by commas (',')
+        """
+        Add multiple words to the words set using a string of comma-separated words.
+
+        :param new_words: a string containing words separated by commas
+        :precondition: new_words argument is a comma-separated list of valid words
+        :postcondition: each word is added to __words set
+        """
         for word in new_words:
             self.add_a_word(word.lower().strip())
 
-    def remove_a_word(self, word):
+    def remove_a_word(self, word: str):
+        """
+        Remove a specific word from the word set.
+
+        :param word: a string that exists in __words
+        :precondition: word argument is in __words
+        :postcondition: word is removed from __words set
+        """
         self.__words.remove(word.lower().strip())
 
-    def remove_words(self, *words):
+    def remove_words(self, *words: str):
+        """
+        Remove multiple existing words from the word set.
+
+        :param words: a string containing words separated by commas
+        :precondition: words argument is a comma-separated list of valid words
+        :postcondition: each word is removed from the __words set
+        """
         for word in words:
             self.remove_a_word(word.lower().strip())
 
-    def sort_words(self):
+    def sort_words(self) -> list:
+        """
+        Return the words set as a list sorted in alphabetic order.
+
+        :precondition: __words contains at least one item
+        :postcondition: returns a list of words in __words
+        :return: list of strings of each word from the __words set
+        """
         return sorted(list(self.__words))
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Return this object as an informative string message.
+
+        This message is printed when the Vocabulary object is printed.
+        :return: message containing words in the __words set as a string
+        """
         return "Here is the list of words currently in the vocabulary: {}".format(" ".join([word.title() for word in
                                                                                             list(self.__words)]))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        Return this object's properties as a string.
+
+        This string is printed when the Vocabulary object is inside a collection.
+        :return: string containing value of the __words set
+        """
         return f"{self.__words}"
 
