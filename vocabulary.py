@@ -20,7 +20,8 @@ class Vocabulary:
         return sorted(list(self.__words))
 
     def __str__(self):
-        return f"Here are the words in the vocabulary list: {[word for word in list(self.__words)]}"
+        return "Here is the list of words currently in the vocabulary: {}".format(" ".join([word.title() for word in
+                                                                                            list(self.__words)]))
 
     def __repr__(self):
         return f"{self.__words}"
