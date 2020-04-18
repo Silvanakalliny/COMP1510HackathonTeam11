@@ -10,63 +10,42 @@ def grammar_questions() -> dict:  # DATA STRUCTURES = DICTIONARY
     :return: a dictionary that contains all the questions used for the grammar quiz.
     """
     # Questions taken from https://www.esl-lounge.com/student/grammar-exercises-beginner.php
+    capital_questions = {"We can go and visit you in the Autumn, possibly September but definitely before Christmas.":
+                         "autumn", "Go and see dr. Cyril Rogers. He's our doctor and the best doctor in the city.":
+                         "dr", "My brother goes to University in a small town in Scotland. Near Glasgow, I think.":
+                         "university", "When I finish this novel called \"simplicity\" you can read it.": "simplicity",
+                         "There was lots of food at the picnic. Apples, Bananas and a big chicken.": "bananas",
+                         "I work at the Apple Store in the iPhone department. My boss is swedish and it's very " +
+                         "interesting.": "swedish", "Is that your mercedes in the car park? I have a small Japanese" +
+                         "car. I can't remember its name.": "mercedes", "My sister studies history at college and " +
+                         "wants to work in a museum.": "history"}
+    verb_questions = {"I came to see if you are tired.": "Correct", "She wants you to go and pay for it.": "Correct",
+                      "I hope seeing you next time you visit.": "Incorrect", "It stopped to rain an hour ago.":
+                      "Incorrect", "My sister convinced me to give up smoking.": "Correct", "Would you like dancing " +
+                      "to this next song?": "Incorrect", "Your aunt should eat less sugary foods.": "Correct",
+                      "The President decided explaining his decision on TV.": "Incorrect"}
+    mc_questions = {"She ________ in Florida but prefers California.": ["lives", ("lives", "goes", "arrives")],
+                    "When we ________ on vacation, we never fly.": ["go", ("are", "go", "went")],
+                    "I ________ four languages, but I love Italian the most.": ["speak", ("talk", "speak", "talks")],
+                    "That dog always ________ with his head against the wall.": ["sleeps", ("goes", "barks", "sleeps")],
+                    "We don't ________ which airport the plane goes from.": ["know", ("know", "think", "like")],
+                    "My girlfriend ________ her eyes when there's a horror movie on TV.": ["closes", ("open", "shut",
+                                                                                                      "closes")],
+                    "Kathy always ________ about the boss. She hates her job!": ["complains", ("says", "tells",
+                                                                                               "complains")],
+                    "She ________ to disco music, only tango.": ["doesn't dance", ("no listen", "doesn't like",
+                                                                                   "doesn't dance")]}
     question_options = {"capitals": {"description": "Find and type in the word that is not properly capitalized " +
                                                     "(either missing a capital where there should be one, or containing"
                                      + "a capital letter that should not be there.)",
-                                     "questions": {"We can go and visit you in the Autumn, possibly September but " +
-                                                   "definitely before Christmas.": "autumn", "Go and see dr. Cyril " +
-                                                   "Rogers. He's our doctor and the best doctor in the city.": "dr",
-                                                   "My brother goes to University in a small town in Scotland. Near " +
-                                                   "Glasgow, I think.": "university", "When I finish this novel called "
-                                                    + "\"simplicity\" you can read it.": "simplicity",
-                                                   "There was lots of food at the picnic. Apples, Bananas and a big " +
-                                                   "chicken.": "bananas", "I work at the Apple Store in the iPhone " +
-                                                   "department. My boss is swedish and it's very interesting." :
-                                                   "swedish", "Is that your mercedes in the car park? I have a small"
-                                                   "Japanese car. I can't remember its name.": "mercedes",
-                                                   "My sister studies history at college and wants to work in a museum."
-                                                   : "history"}},
+                                     "questions": capital_questions},
                         "verbs": {"description": "Decide whether the verb conjugation in the following sentences is " +
                                                  "correct or incorrect by entering 1 or 2.",
-                                                 "questions": {"I came to see if you are tired.": "Correct", "She wants"
-                                                               + "you to go and pay for it.": "Correct",
-                                                               "I hope seeing you next time you visit.": "Incorrect",
-                                                               "It stopped to rain an hour ago.": "Incorrect",
-                                                               "My sister convinced me to give up smoking.": "Correct",
-                                                               "Would you like dancing to this next song?": "Incorrect",
-                                                               "Your aunt should eat less sugary foods.": "Correct",
-                                                               "The President decided explaining his decision on TV.":
-                                                               "Incorrect"}},
+                                                 "questions": verb_questions},
                         "present simple mc": {"description": "Choose the option that completes the sentence in a " +
                                                              "grammatically correct way by entering the corresponding" +
                                                              " number.",
-                                                             "questions": {"She ________ in Florida but prefers " +
-                                                                           "California.": ["lives", ("lives", "goes",
-                                                                                                     "arrives")],
-                                                                           "When we ________ on vacation, we never fly."
-                                                                           : ["go", ("are", "go", "went")],
-                                                                           "I ________ four languages, but I love " +
-                                                                           "Italian the most.": ["speak", ("talk",
-                                                                                                           "speak",
-                                                                                                           "talks")],
-                                                                           "That dog always ________ with his head " +
-                                                                           "against the wall.": ["sleeps", ("goes",
-                                                                                                            "barks",
-                                                                                                            "sleeps")],
-                                                                           "We don't ________ which airport the plane" +
-                                                                           "goes from.": ["know", ("know", "think",
-                                                                                                   "like")],
-                                                                           "My girlfriend ________ her eyes when " +
-                                                                           "there's a horror movie on TV.":
-                                                                               ["closes", ("open", "shut", "closes")],
-                                                                           "Kathy always ________ about the boss. She" +
-                                                                           "hates her job!":
-                                                                               ["complains", ("says", "tells",
-                                                                                              "complains")],
-                                                                           "She ________ to disco music, only tango.":
-                                                                               ["doesn't dance", ("no listen",
-                                                                                                  "doesn't like",
-                                                                                                  "doesn't dance")]}}}
+                                                             "questions": mc_questions}}
     return question_options
 
 
@@ -144,7 +123,7 @@ def remove_punctuation(answer: str) -> str:
     >>> remove_punctuation("hello_")
     'hello'
     """
-    punctuation = ',.~!@#$%^&*()_+-={}[]|/<>:’\“;\"\'\n'
+    punctuation = ',.~!@#$%^&*()_+-={}[]|/<>:’\\;\"\'\n'
     for marker in punctuation:
         if marker in answer:
             answer = answer.replace(marker, "")
