@@ -285,13 +285,17 @@ def check_dictionary(user_class: Vocabulary, word: str):
     print(f"----    {word}    ----\n"
           f"Definition: {definition}\n"
           f"Example: {example_sentence}\n")
-    # If the word is not in the vocabulary sheet
-    if word not in user_class.sort_words():
-        # Ask the user if the user wants to add the word to the vocabulary sheet
-        user_choice = input(f"Do you want to add \'{word}\' into you vocabulary? ('Y' to add, 'N' pass):")
-        # If yes, add the word to the vocabulary sheet
-        if user_choice.strip().lower() == 'y':
-            user_class.add_a_word(word)
+
+    if definition == "!":
+        print("This is not a word in the dictionary!")
+    else:
+        # If the word is not in the vocabulary sheet
+        if word not in user_class.sort_words():
+            # Ask the user if the user wants to add the word to the vocabulary sheet
+            user_choice = input(f"Do you want to add \'{word}\' into you vocabulary? ('Y' to add, 'N' pass):")
+            # If yes, add the word to the vocabulary sheet
+            if user_choice.strip().lower() == 'y':
+                user_class.add_a_word(word)
 
 
 if __name__ == '__main__':
