@@ -68,8 +68,7 @@ def run_test(level, test):
             correct = check_answer_verbs(level, question, user_answer)
         else:
             correct = check_answer_present_simple(level, question, user_answer)
-        if correct:
-            score += 1
+        score += 1 if correct else 0
     return score
 
 

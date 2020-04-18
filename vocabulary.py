@@ -1,3 +1,21 @@
+"""Module containing Vocabulary class and related-functions."""
+
+
+def word_lister(string):
+    string = string.lower()
+    word = ''
+    word_list = []
+    for character in string:
+        if character == ',' and word.strip() != '':
+            word_list.append(word.strip())
+            word = ''
+        else:
+            word += character
+    if word.strip() != '':
+        word_list.append(word.strip())
+    return word_list
+
+
 class Vocabulary:
     def __init__(self):
         """Initialize a new Vocabulary object."""
@@ -11,9 +29,10 @@ class Vocabulary:
         :precondition: new_word exists in Oxford dictionary API
         :postcondition: word is added to to this instance's __words set
         """
+        print(f"Added {new_word} to word list.")
         self.__words.add(new_word.lower().strip())
 
-    def add_words(self, *new_words: str):  # will need to add code in main for splitting input by commas (',')
+    def add_words(self, new_words: str):  # will need to add code in main for splitting input by commas (',')
         """
         Add multiple words to the words set using a string of comma-separated words.
 
@@ -21,8 +40,9 @@ class Vocabulary:
         :precondition: new_words argument is a comma-separated list of valid words
         :postcondition: each word is added to __words set
         """
-        for word in new_words:
-            self.add_a_word(word.lower().strip())
+        word_list = word_lister(new_words)
+        for word in word_list:
+            self.add_a_word(word)
 
     def remove_a_word(self, word: str):
         """
@@ -32,9 +52,10 @@ class Vocabulary:
         :precondition: word argument is in __words
         :postcondition: word is removed from __words set
         """
+        print(f"Removing {word} from your word list.")
         self.__words.remove(word.lower().strip())
 
-    def remove_words(self, *words: str):
+    def remove_words(self, words: str):
         """
         Remove multiple existing words from the word set.
 
@@ -42,8 +63,9 @@ class Vocabulary:
         :precondition: words argument is a comma-separated list of valid words
         :postcondition: each word is removed from the __words set
         """
-        for word in words:
-            self.remove_a_word(word.lower().strip())
+        word_list = word_lister(words)
+        for word in word_list:
+            self.remove_a_word(word)
 
     def sort_words(self) -> list:
         """
