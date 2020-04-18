@@ -107,8 +107,8 @@ class Vocabulary:
         This message is printed when the Vocabulary object is printed.
         :return: message containing words in the __words set as a string
         """
-        return "Here is the list of words currently in the vocabulary: {}".format(" ".join([word.title() for word in
-                                                                                            list(self.__words)]))  # LIST COMPREHENSION
+        return "Here is the list of words currently in the " \
+               "vocabulary: {}".format(" ".join([word.title() for word in list(self.__words)]))  # LIST COMPREHENSION
 
     def __repr__(self) -> str:
         """
