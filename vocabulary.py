@@ -10,6 +10,22 @@ def word_lister(string):
     return word_list
 
 
+def is_valid_word(string: str) -> str:
+    """
+    Remove all characters from a string except Latin letters and whitespace.
+
+    :param string: a string containing letters and/or spaces
+    :precondition: string argument contains words separated by whitespace
+    :postcondition: generates a new string containing only letters and whitespace
+    :return: refactored string containing only Latin letters and whitespace
+    """
+    valid_chars = [chr(i) for i in range(65, 91)] + [chr(i) for i in range(97, 123)] + [' ', ',', "\'"]
+    for character in string:
+        if character not in valid_chars:
+            return False
+    return True
+
+
 class Vocabulary:
     def __init__(self):
         """Initialize a new Vocabulary object."""
@@ -23,9 +39,15 @@ class Vocabulary:
         :precondition: new_word exists in Oxford dictionary API
         :postcondition: word is added to to this instance's __words set
         """
-        if new_word.strip() != "":
-            self.__words.add(new_word.lower().strip())
-            print(f"Added {new_word} to word list.")
+        try:
+            if is_valid_word(new_word):
+                if new_word.strip() != "":
+                    self.__words.add(new_word.lower().strip())
+                    print(f"Added {new_word} to word list.")
+            else:
+                raise ValueError(new_word + " is not a valid word")
+        except ValueError as e:
+            print(f"Word not added: " + str(e))
 
     def add_words(self, new_words: str):  # will need to add code in main for splitting input by commas (',')
         """
