@@ -13,7 +13,7 @@ def word_lister(string):
 class Vocabulary:
     def __init__(self):
         """Initialize a new Vocabulary object."""
-        self.__words = set()
+        self.__words = set()  # DATA STRUCTURES - SET
 
     def add_a_word(self, new_word: str):
         """
@@ -86,7 +86,7 @@ class Vocabulary:
         :return: message containing words in the __words set as a string
         """
         return "Here is the list of words currently in the vocabulary: {}".format(" ".join([word.title() for word in
-                                                                                            list(self.__words)]))
+                                                                                            list(self.__words)]))  # LIST COMPREHENSION
 
     def __repr__(self) -> str:
         """
