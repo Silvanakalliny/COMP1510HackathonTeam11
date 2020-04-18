@@ -3,11 +3,11 @@ import random
 import re
 import itertools
 from vocabulary import Vocabulary
+from grammar import grammar_test
 import doctest
 import time
 import json
 import requests
-
 
 
 def study_time(func) -> float:
@@ -73,6 +73,8 @@ def main():
                 test_yourself(vocabulary)
             except IndexError:
                 print("The question list is Empty")
+        elif choice == "9":
+            grammar_test()
 
 
 def print_list_with_definition(word_list):
@@ -255,3 +257,7 @@ def check_dictionary(user_class: Vocabulary, word: str):
         # If yes, add the word to the vocabulary sheet
         if user_choice.strip().lower() == 'y':
             user_class.add_a_word(word)
+
+
+if __name__ == '__main__':
+    main()
