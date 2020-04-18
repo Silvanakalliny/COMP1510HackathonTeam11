@@ -7,7 +7,7 @@ import time
 import requests
 
 
-def study_time(func):  # DECORATOR
+def study_time(func):                                                                                   # DECORATOR
     def wrapper_timer(*args, **kwargs):
         start_time = time.perf_counter()
         func(*args, **kwargs)
@@ -55,13 +55,13 @@ def main():
             new_words = input("Add new words (separate by commas): ")
             vocabulary.add_words(new_words)
         elif choice == "4":
-            try:
+            try:                                                                                # EXCEPTION HANDLING
                 delete_word = input("Remove a word: ")
                 vocabulary.remove_a_word(delete_word)
             except KeyError:
                 print("Error: That word is not in the vocabulary.")
         elif choice == "5":
-            try:
+            try:                                                                                # EXCEPTION HANDLING
                 words = input("Enter the words you would like to remove (separate by commas): ")
                 vocabulary.remove_words(words)
             except KeyError:
@@ -79,7 +79,7 @@ def main():
                 print("\nHere is your word list with definition")
                 print_list_with_definition(vocabulary.sort_words())
         elif choice == "8":
-            try:
+            try:                                                                                # EXCEPTION HANDLING
                 test_yourself(vocabulary)
             except IndexError:
                 print("The question list is Empty")
@@ -87,13 +87,23 @@ def main():
             grammar_test()
 
 
-def print_list_with_definition(word_list):
+def print_list_with_definition(word_list: list):
+    """
+    Print the vocabulary sheet with definitions
+
+    :precondition: the word list must be a list
+    :postcondition: print the word in vocabulary sheet with definitions
+    :raise TypeError: if the word_list is not a list.
+    :param word_list: must be a list
+    :return: the word and the definition of the word
+    """
+    #                                                                         DICTIONARY, DICTIONARY COMPREHENSION
     word_and_definition = {word: definition_and_example(word)[0] for word in word_list}
-    for num, (word, definition) in enumerate(word_and_definition.items(), 1):
+    for num, (word, definition) in enumerate(word_and_definition.items(), 1):                           # ENUMERATE
         print("%d. %s: %s" % (num, word.title(), definition))
 
 
-def print_lists(a_list):
+def print_lists(a_list: list):
     """
     format a list in vertical with number assigning to each item
 
@@ -106,11 +116,11 @@ def print_lists(a_list):
 
     """
     # enumerate through a list of items and number them
-    for n in range(len(a_list)):
+    for n in range(len(a_list)):                                                                             # RANGE
         print("%d. %s" % (n+1, a_list[n]))
 
 
-def user_input(item_list, result, input_string) -> str:
+def user_input(item_list: list, result: str, input_string: str) -> str:
     """
     Prints in the format of dotted line, a message, the item list and returns a prompt
 
@@ -128,7 +138,7 @@ def user_input(item_list, result, input_string) -> str:
     return input("\n%s" % input_string).strip()
 
 
-def definition_and_example(word: str) -> tuple or str:
+def definition_and_example(word: str) -> tuple or str:                                              # DICTIONARY API
     """
     Return the definition and an example of the word.
 
@@ -145,7 +155,7 @@ def definition_and_example(word: str) -> tuple or str:
     my_id = "67421323"
     my_key = "427d2d5a8f8aab43d83284acf09cfa3f"
     # try making requests to the API
-    try:
+    try:                                                                                         # EXCEPTION HANDLING
         response = requests.get(f"https://od-api.oxforddictionaries.com/api/v2/entrie" +
                                 f"s/en-us/{word}", headers={'app_id': my_id, 'app_key': my_key})
         response.raise_for_status()
@@ -177,7 +187,7 @@ def test_yourself(user_class: Vocabulary):
     Can't do doctest and unittest because it's API related
     """
     # Make a counter of the number of question
-    number_of_question = itertools.count(1)
+    number_of_question = itertools.count(1)                                                                 # ITERTOOL
     # Make a new list of vocabulary sheet as the question list
     question_list = user_class.sort_words()
     # Keep looping until the user stops the test
@@ -223,7 +233,7 @@ def print_word_information(question_list: list, question_number: int) -> str:
     # Print the question number, definition, and example sentence of the word
     print(f"{question_number}. Definition: {definition_and_example(the_word)[0]}\n"
           f"   Example:{example_sentence}\n"
-          f"   First letter: {list(the_word)[:1]}")     # LIST SLICING
+          f"   First letter: {list(the_word)[:1]}")                                                     # LIST SLICING
     # Return the word
     return the_word
 
@@ -252,7 +262,7 @@ def regex_check(word: str, answer: str) -> bool:
     False
     """
     # Check the answer with regular expression
-    regex_word = re.compile(f"^{word}$")
+    regex_word = re.compile(f"^{word}$")                                                        # REGULAR EXPRESSION
     match_word = regex_word.search(answer)
     # Return True if the answer is correct else False
     return True if match_word else False

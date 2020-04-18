@@ -29,7 +29,7 @@ def is_valid_word(string: str):
 class Vocabulary:
     def __init__(self):
         """Initialize a new Vocabulary object."""
-        self.__words = set()  # DATA STRUCTURES - SET
+        self.__words = set()                                                                  # DATA STRUCTURES - SET
 
     def add_a_word(self, new_word: str):
         """
