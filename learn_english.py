@@ -3,18 +3,11 @@ import re
 import itertools
 from vocabulary import Vocabulary
 from grammar import grammar_test
-import doctest
 import time
 import requests
 
 
 def study_time(func) -> float:  # DECORATOR
-    """
-    Times the runtime of a function.
-
-    :param func: the function to be timed
-    :return: the run time, in seconds
-    """
     def wrapper_timer(*args, **kwargs):
         start_time = time.perf_counter()
         func(*args, **kwargs)
@@ -38,11 +31,11 @@ def main():
     vocabulary = Vocabulary()
 
     running = True
-    while running:  # LOOPING
+    while running:
         menu_list = ["Check a word", "Add a word", "Add words",
                      "Remove a word", "Remove words",
                      "Print the word list", "Print the word list with definition",
-                     "Test your vocabulary", "Test your grammar"]  # DATA STRUCTURE - LIST
+                     "Test your vocabulary", "Test your grammar"]
 
         choice = user_input(menu_list,
                             "Welcome to Learn English App!",
@@ -62,7 +55,7 @@ def main():
             new_words = input("Add new words (separate by commas): ")
             vocabulary.add_words(new_words)
         elif choice == "4":
-            try:                 # ERROR HANDLING - TRY EXCEPT
+            try:
                 delete_word = input("Remove a word: ")
                 vocabulary.remove_a_word(delete_word)
             except KeyError:
@@ -94,18 +87,13 @@ def main():
             grammar_test()
 
 
-def print_list_with_definition(word_list: list):
-    """
-    Prints each word in the word list along with its definition.
-
-    :param word_list: a list of words to be printed.
-    """
-    word_and_definition = {word: definition_and_example(word)[0] for word in word_list}  # DICTIONARY COMPREHENSION
-    for num, (word, definition) in enumerate(word_and_definition.items(), 1):  # ENUMERATE FUNCTION
+def print_list_with_definition(word_list):
+    word_and_definition = {word: definition_and_example(word)[0] for word in word_list}
+    for num, (word, definition) in enumerate(word_and_definition.items(), 1):
         print("%d. %s: %s" % (num, word.title(), definition))
 
 
-def print_lists(a_list: list):
+def print_lists(a_list):
     """
     format a list in vertical with number assigning to each item
 
@@ -118,11 +106,11 @@ def print_lists(a_list: list):
 
     """
     # enumerate through a list of items and number them
-    for n in range(len(a_list)):  # RANGE FUNCTION
+    for n in range(len(a_list)):
         print("%d. %s" % (n+1, a_list[n]))
 
 
-def user_input(item_list: list, result: str, input_string: str) -> str:
+def user_input(item_list, result, input_string) -> str:
     """
     Prints in the format of dotted line, a message, the item list and returns a prompt
 
@@ -158,7 +146,7 @@ def definition_and_example(word: str) -> tuple or str:
     my_key = "427d2d5a8f8aab43d83284acf09cfa3f"
     # try making requests to the API
     try:
-        response = requests.get(f"https://od-api.oxforddictionaries.com/api/v2/entrie" +    # API
+        response = requests.get(f"https://od-api.oxforddictionaries.com/api/v2/entrie" +
                                 f"s/en-us/{word}", headers={'app_id': my_id, 'app_key': my_key})
         response.raise_for_status()
         # Get access to the word's definition and example
@@ -189,7 +177,7 @@ def test_yourself(user_class: Vocabulary):
     Can't do doctest and unittest because it's API related
     """
     # Make a counter of the number of question
-    number_of_question = itertools.count(1)  # ITERTOOLS
+    number_of_question = itertools.count(1)
     # Make a new list of vocabulary sheet as the question list
     question_list = user_class.sort_words()
     # Keep looping until the user stops the test
@@ -234,7 +222,8 @@ def print_word_information(question_list: list, question_number: int) -> str:
     example_sentence = definition_and_example(the_word)[1].replace(the_word, "________")
     # Print the question number, definition, and example sentence of the word
     print(f"{question_number}. Definition: {definition_and_example(the_word)[0]}\n"
-          f"   Example:{example_sentence}")
+          f"   Example:{example_sentence}\n"
+          f"   First letter: {list(the_word)[:1]}")     # LIST SLICING
     # Return the word
     return the_word
 
@@ -263,7 +252,7 @@ def regex_check(word: str, answer: str) -> bool:
     False
     """
     # Check the answer with regular expression
-    regex_word = re.compile(f"^{word}$")  # REGEX
+    regex_word = re.compile(f"^{word}$")
     match_word = regex_word.search(answer)
     # Return True if the answer is correct else False
     return True if match_word else False
@@ -290,19 +279,14 @@ def check_dictionary(user_class: Vocabulary, word: str):
     print(f"----    {word}    ----\n"
           f"Definition: {definition}\n"
           f"Example: {example_sentence}\n")
-
-    if definition == "!":
-        print("This is not a word in the dictionary!")
-    else:
-        # If the word is not in the vocabulary sheet
-        if word not in user_class.sort_words():
-            # Ask the user if the user wants to add the word to the vocabulary sheet
-            user_choice = input(f"Do you want to add \'{word}\' into you vocabulary? ('Y' to add, 'N' pass):")
-            # If yes, add the word to the vocabulary sheet
-            if user_choice.strip().lower() == 'y':
-                user_class.add_a_word(word)
+    # If the word is not in the vocabulary sheet
+    if word not in user_class.sort_words():
+        # Ask the user if the user wants to add the word to the vocabulary sheet
+        user_choice = input(f"Do you want to add \'{word}\' into you vocabulary? ('Y' to add, 'N' pass):")
+        # If yes, add the word to the vocabulary sheet
+        if user_choice.strip().lower() == 'y':
+            user_class.add_a_word(word)
 
 
 if __name__ == '__main__':
     main()
-
