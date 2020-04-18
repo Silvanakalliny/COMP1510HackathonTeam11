@@ -1,8 +1,9 @@
 import time
 import doctest
+# TUPLE DATA STRUCTURE ON THIS PAGE (IN GRAMMAR_QUESTIONS DICTIONARY)
 
 
-def grammar_questions() -> dict:
+def grammar_questions() -> dict:  # DATA STRUCTURES = DICTIONARY
     """
     Return a dictionary that contains all the questions used for the grammar quiz.
 
