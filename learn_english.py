@@ -5,11 +5,16 @@ from vocabulary import Vocabulary
 from grammar import grammar_test
 import doctest
 import time
-import json
 import requests
 
 
 def study_time(func) -> float:  # DECORATOR
+    """
+    Times the runtime of a function.
+
+    :param func: the function to be timed
+    :return: the run time, in seconds
+    """
     def wrapper_timer(*args, **kwargs):
         start_time = time.perf_counter()
         func(*args, **kwargs)
@@ -84,13 +89,18 @@ def main():
             grammar_test()
 
 
-def print_list_with_definition(word_list):
+def print_list_with_definition(word_list: list):
+    """
+    Prints each word in the word list along with its definition.
+
+    :param word_list: a list of words to be printed.
+    """
     word_and_definition = {word: definition_and_example(word)[0] for word in word_list}  # DICTIONARY COMPREHENSION
     for num, (word, definition) in enumerate(word_and_definition.items(), 1):  # ENUMERATE FUNCTION
         print("%d. %s: %s" % (num, word.title(), definition))
 
 
-def print_lists(a_list):
+def print_lists(a_list: list):
     """
     format a list in vertical with number assigning to each item
 
@@ -107,7 +117,7 @@ def print_lists(a_list):
         print("%d. %s" % (n+1, a_list[n]))
 
 
-def user_input(item_list, result, input_string) -> str:
+def user_input(item_list: list, result: str, input_string: str) -> str:
     """
     Prints in the format of dotted line, a message, the item list and returns a prompt
 
