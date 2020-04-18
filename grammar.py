@@ -1,8 +1,9 @@
 import time
 import doctest
+# TUPLE DATA STRUCTURE ON THIS PAGE (IN GRAMMAR_QUESTIONS DICTIONARY)
 
 
-def grammar_questions() -> dict:
+def grammar_questions() -> dict:  # DATA STRUCTURES = DICTIONARY
     """
     Return a dictionary that contains all the questions used for the grammar quiz.
 
@@ -25,7 +26,7 @@ def grammar_questions() -> dict:
                                                                "My sister convinced me to give up smoking.": "Correct", "Would you like dancing to this next song?": "Incorrect",
                                                                "Your aunt should eat less sugary foods.": "Correct", "The President decided explaining his decision on TV.": "Incorrect"}},
                         "present simple mc": {"description": "Choose the option that completes the sentence in a grammatically correct way by entering the corresponding number.",
-                                                             "questions": {"She ________ in Florida but prefers California.": ["lives", ("lives", "goes", "arrives")],
+                                                             "questions": {"She ________ in Florida but prefers California.": ["lives", ("lives", "goes", "arrives")],  # DATA STRUCTURE - TUPLE
                                                                            "When we ________ on vacation, we never fly.": ["go", ("are", "go", "went")],
                                                                            "I ________ four languages, but I love Italian the most.": ["speak", ("talk", "speak", "talks")],
                                                                            "That dog always ________ with his head against the wall.": ["sleeps", ("goes", "barks", "sleeps")],
