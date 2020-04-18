@@ -2,7 +2,7 @@ import time
 import doctest
 
 
-def grammar_questions():
+def grammar_questions() -> dict:
     """
     Return a dictionary that contains all the questions used for the grammar quiz.
 
@@ -61,7 +61,7 @@ def grammar_test():
         run_test(question_source, chosen_test)
 
 
-def run_test(question_bank, test):
+def run_test(question_bank: dict, test: str):
     """
     Run the quiz by asking the user each question from the test bank for the activity they chose, and grading their answers.
 
@@ -94,7 +94,7 @@ def run_test(question_bank, test):
     print(f"Your final score was {score} out of a possible {possible_score}.")  # prints the user's actual score and the highest possible score.
 
 
-def remove_punctuation(answer):
+def remove_punctuation(answer: str) -> str:
     """
     Remove all punctuation from the string 'answer' and return 'answer' with all punctuation removed
     :param answer: a string, from which all punctuation will be removed
@@ -112,7 +112,7 @@ def remove_punctuation(answer):
     return answer
 
 
-def check_answer_capitals(question_source, question, answer):
+def check_answer_capitals(question_source: dict, question: str, answer: str) -> int:
     """
     Checks the answer if the user is doing a capitalization quiz.
 
@@ -133,7 +133,7 @@ def check_answer_capitals(question_source, question, answer):
     return score
 
 
-def check_answer_verbs(question_source, question, answer):
+def check_answer_verbs(question_source: dict, question: str, answer: str) -> int:
     """
     Checks the answer if the user is doing a verb conjugation quiz.
 
@@ -165,7 +165,7 @@ def check_answer_verbs(question_source, question, answer):
         return score
 
 
-def check_answer_present_simple(question_source, question, answer):
+def check_answer_present_simple(question_source: dict, question: str, answer: str) -> int:
     """
     Checks the answer if the user is doing a present simple quiz.
 
@@ -195,6 +195,10 @@ def check_answer_present_simple(question_source, question, answer):
 
 
 def main():
+    """
+    Drive the function
+
+    """
     grammar_test()
 
 
