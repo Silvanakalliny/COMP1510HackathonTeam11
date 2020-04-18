@@ -8,12 +8,6 @@ import time
 import json
 import requests
 
-def app_id():
-    return "a102c50a"
-
-def api_key():
-    return "02d554c4537100778aa8e303c11c438a"
-
 
 
 def study_time(func) -> float:
@@ -76,9 +70,11 @@ def main():
 
 
 def print_list(word_list):
+    app_id = "a102c50a"
+    api_key = "02d554c4537100778aa8e303c11c438a"
     for i, word in enumerate(word_list, 1):
         url = f"https://od-api.oxforddictionaries.com/api/v2/entries/en/{word}"
-        response = requests.get(url, headers={"app_id": app_id(), "app_key": api_key()})
+        response = requests.get(url, headers={"app_id": app_id, "app_key": api_key})
         word_data = json.loads(response.text)
         definition = word_data["results"][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
         print("%d. %s: %s" % (i, word.title(), definition))
