@@ -5,6 +5,15 @@ import itertools
 from vocabulary import Vocabulary
 import doctest
 import time
+import json
+import requests
+
+def app_id():
+    return "a102c50a"
+
+def api_key():
+    return "02d554c4537100778aa8e303c11c438a"
+
 
 
 def study_time(func) -> float:
@@ -30,7 +39,7 @@ def main():
         menu_list = ["Check a word", "Add a word", "Add words",
                      "Remove a word", "Remove words",
                      "Print the word list", "Print the word list with definition",
-                     "Test your vocabulary"]
+                     "Test your vocabulary", "Test your grammar"]
 
         choice = user_input(menu_list,
                             "Welcome to Learn English App!",
@@ -66,9 +75,13 @@ def main():
                 print("The question list is Empty")
 
 
-def print_list(a_list):
-    for i, items in enumerate(a_list, 1):
-        print("%d. %s" % (i, items))
+def print_list(word_list):
+    for i, word in enumerate(word_list, 1):
+        url = f"https://od-api.oxforddictionaries.com/api/v2/entries/en/{word}"
+        response = requests.get(url, headers={"app_id": app_id(), "app_key": api_key()})
+        word_data = json.loads(response.text)
+        definition = word_data["results"][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
+        print("%d. %s: %s" % (i, word.title(), definition))
 
 
 def user_input(item_list, result, input_string) -> str:
@@ -207,4 +220,3 @@ def regex_check(word: str, answer: str) -> bool:
     return True if match_word else False
 
 
-main()
