@@ -51,11 +51,17 @@ def main():
             new_words = input("Add new words (separate by commas): ")
             vocabulary.add_words(new_words)
         elif choice == "4":
-            delete_word = input("Remove a word: ")
-            vocabulary.remove_a_word(delete_word)
+            try:
+                delete_word = input("Remove a word: ")
+                vocabulary.remove_a_word(delete_word)
+            except KeyError:
+                print("Error: That word is not in the vocabulary.")
         elif choice == "5":
-            words = input("Enter the words you would like to remove (separate by commas): ")
-            vocabulary.remove_words(words)
+            try:
+                words = input("Enter the words you would like to remove (separate by commas): ")
+                vocabulary.remove_words(words)
+            except KeyError:
+                print("Error: One or more of your words are not in the vocabulary.")
         elif choice == "6":
             if len(vocabulary.sort_words()) == 0:
                 print("\nYour list is empty! Add some words to your list first!")
