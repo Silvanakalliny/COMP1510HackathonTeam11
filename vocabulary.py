@@ -3,16 +3,10 @@
 
 def word_lister(string):
     string = string.lower()
-    word = ''
-    word_list = []
-    for character in string:
-        if character == ',' and word.strip() != '':
-            word_list.append(word.strip())
-            word = ''
-        else:
-            word += character
-    if word.strip() != '':
-        word_list.append(word.strip())
+    word_list = string.split(",")
+    for word in word_list:
+        if word.strip() == "":
+            word_list.remove(word)
     return word_list
 
 
@@ -29,8 +23,9 @@ class Vocabulary:
         :precondition: new_word exists in Oxford dictionary API
         :postcondition: word is added to to this instance's __words set
         """
-        print(f"Added {new_word} to word list.")
-        self.__words.add(new_word.lower().strip())
+        if new_word.strip() != "":
+            self.__words.add(new_word.lower().strip())
+            print(f"Added {new_word} to word list.")
 
     def add_words(self, new_words: str):  # will need to add code in main for splitting input by commas (',')
         """
@@ -40,9 +35,15 @@ class Vocabulary:
         :precondition: new_words argument is a comma-separated list of valid words
         :postcondition: each word is added to __words set
         """
+        whitespace_word = False
         word_list = word_lister(new_words)
         for word in word_list:
-            self.add_a_word(word)
+            word = word.strip()
+            if word != "":
+                whitespace_word = True
+                self.add_a_word(word)
+        if whitespace_word:
+            print("Error. One or more of your words are all whitespace.")
 
     def remove_a_word(self, word: str):
         """

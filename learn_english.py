@@ -47,6 +47,8 @@ def main():
         elif choice == "2":
             new_word = input("Add a new word: ")
             vocabulary.add_a_word(new_word)
+            if new_word.strip() == "":
+                print("Error. Your word only contains whitespace.")
         elif choice == "3":
             new_words = input("Add new words (separate by commas): ")
             vocabulary.add_words(new_words)
