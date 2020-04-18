@@ -42,7 +42,8 @@ def main():
         if choice == "quit":
             running = False
         elif choice == "1":
-            pass
+            the_word = input("What word you want to check? : ")
+            check_dictionary(vocabulary, the_word)
         elif choice == "2":
             new_word = input("Add a new word: ")
             vocabulary.add_a_word(new_word)
@@ -127,7 +128,7 @@ def definition_and_example(word: str) -> tuple or str:
         # Return the definition and the example
         return definition, an_example
     # Catch the Error if the word dose not exist and return a helping message
-    except requests.exceptions.HTTPError:
+    except (requests.exceptions.HTTPError, KeyError):
         help_message = "!!! There is no such a word"
         return help_message
 
@@ -226,4 +227,31 @@ def regex_check(word: str, answer: str) -> bool:
     return True if match_word else False
 
 
-main()
+def check_dictionary(user_class: Vocabulary, word: str):
+    """
+    Check the definition and example of the word by dictionary API
+
+    Computational thinking: I used Decomposition to breakdown the user action into smaller tasks
+    :precondition: user_class must be a Vocabulary class, the word must be a string has a meaning
+    :postcondition: print the definition and an example of the word
+    :raise KeyError, HTTPError: if the word doesn't have an definition and example, or the word doesn't exist
+    :param user_class: must be a Vocabulary Class
+    :param word: must be a string that has a meaning
+    :return: the definition and an example of the word
+
+    Can't do doctest and unittest because it's API related
+    """
+    # Get the definition and example
+    definition = definition_and_example(word)[0]
+    example_sentence = definition_and_example(word)[1]
+    # Print the definition and example of the word
+    print(f"----    {word}    ----\n"
+          f"Definition: {definition}\n"
+          f"Example: {example_sentence}\n")
+    # If the word is not in the vocabulary sheet
+    if word not in user_class.sort_words():
+        # Ask the user if the user wants to add the word to the vocabulary sheet
+        user_choice = input(f"Do you want to add \'{word}\' into you vocabulary? ('Y' to add, 'N' pass):")
+        # If yes, add the word to the vocabulary sheet
+        if user_choice.strip().lower() == 'y':
+            user_class.add_a_word(word)
