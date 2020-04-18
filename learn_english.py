@@ -60,10 +60,13 @@ def main():
                 print("\nYour list is empty! Add some words to your list first!")
             else:
                 print("\nHere is your word list")
-                print_list(vocabulary.sort_words())
-            pass
+                print_lists(vocabulary.sort_words())
         elif choice == "7":
-            pass
+            if len(vocabulary.sort_words()) == 0:
+                print("\nYour list is empty! Add some words to your list first!")
+            else:
+                print("\nHere is your word list with definition")
+                print_list_with_definition(vocabulary.sort_words())
         elif choice == "8":
             try:
                 test_yourself(vocabulary)
@@ -71,7 +74,7 @@ def main():
                 print("The question list is Empty")
 
 
-def print_list(word_list):
+def print_list_with_definition(word_list):
     app_id = "a102c50a"
     api_key = "02d554c4537100778aa8e303c11c438a"
     for i, word in enumerate(word_list, 1):
@@ -82,10 +85,15 @@ def print_list(word_list):
         print("%d. %s: %s" % (i, word.title(), definition))
 
 
+def print_lists(a_list):
+    for i, items in enumerate(a_list, 1):
+        print("%d. %s" % (i, items))
+
+
 def user_input(item_list, result, input_string) -> str:
     print("\n" + "-" * 50)
     print("\n%s\n" % result)
-    print_list(item_list)
+    print_lists(item_list)
     return input("\n%s" % input_string).strip()
 
 
@@ -218,3 +226,4 @@ def regex_check(word: str, answer: str) -> bool:
     return True if match_word else False
 
 
+main()
