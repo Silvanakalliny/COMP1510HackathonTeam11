@@ -10,7 +10,7 @@ def word_lister(string):
     return word_list
 
 
-def is_valid_word(string: str) -> str:
+def is_valid_word(string: str):
     """
     Remove all characters from a string except Latin letters and whitespace.
 
@@ -118,4 +118,3 @@ class Vocabulary:
         :return: string containing value of the __words set
         """
         return f"{self.__words}"
-
