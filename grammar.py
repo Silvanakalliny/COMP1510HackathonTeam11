@@ -80,7 +80,8 @@ def grammar_test():
     :raise: ValueError, if the user's input is anything other than an integer between 1 and 3.
     """
     try:
-        test_type_input = int(input("""\nWould you like to test your knowledge of proper use of capitals, general verb conjugation or present simple verb conjugation?
+        test_type_input = int(input("""\nWould you like to test your knowledge of proper use of capitals, general verb 
+                                         conjugation or present simple verb conjugation?
                          1. Capitalization
                          2. General Verb Conjugation
                          3. Present simple verb conjugation\n\nPlease enter a number between 1-3 to continue.\n"""))
@@ -97,12 +98,13 @@ def grammar_test():
 
 def run_test(question_bank: dict, test: str):
     """
-    Run the quiz by asking the user each question from the test bank for the activity they chose, and grading their answers.
+    Run the quiz by asking the user each question from the test bank for the activity they chose,
+    and grading their answers.
 
     :param question_bank: a dictionary which contains all the questions to be used for the quiz, as well as the answers.
     :param test: a string which specifies the type of activity the user has selected.
     :precondition: users must only enter valid values for their answers to the questions, as indicated in the prompts.
-    :precondition: the function will continue to ask questions and mark users until it has gone through all of the questions.
+    :precondition: the function will ask questions and mark users until it has gone through all of the questions.
 
     """
     questions = question_bank[test]["questions"].keys()  # gets the list of questions for this activity

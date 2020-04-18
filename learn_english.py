@@ -7,7 +7,7 @@ import time
 import requests
 
 
-def study_time(func) -> float:  # DECORATOR
+def study_time(func):  # DECORATOR
     def wrapper_timer(*args, **kwargs):
         start_time = time.perf_counter()
         func(*args, **kwargs)
