@@ -39,7 +39,8 @@ def main():
         if choice == "quit":
             running = False
         elif choice == "1":
-            pass
+            the_word = input("What word you want to check? : ")
+            check_dictionary(vocabulary, the_word)
         elif choice == "2":
             add_word = input("Add a new word: ")
             vocabulary.add_a_word(add_word)
