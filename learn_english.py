@@ -77,7 +77,7 @@ def main():
             grammar_test()
 
 
-def print_list_with_definition(word_list):
+def print_list_with_definition(word_list: list):
     app_id = "a102c50a"
     api_key = "02d554c4537100778aa8e303c11c438a"
     for i, word in enumerate(word_list, 1):
@@ -88,12 +88,12 @@ def print_list_with_definition(word_list):
         print("%d. %s: %s" % (i, word.title(), definition))
 
 
-def print_lists(a_list):
+def print_lists(a_list: list) -> list:
     for i, items in enumerate(a_list, 1):
         print("%d. %s" % (i, items))
 
 
-def user_input(item_list, result, input_string) -> str:
+def user_input(item_list: list, result: str, input_string: str) -> str:
     print("\n" + "-" * 50)
     print("\n%s\n" % result)
     print_lists(item_list)
@@ -129,7 +129,7 @@ def definition_and_example(word: str) -> tuple or str:
         an_example = access_word_information['examples'][0]['text']
         # Return the definition and the example
         return definition, an_example
-    # Catch the Error if the word dose not exist and return a helping message
+    # Catch the Error if the word does not exist and return a helping message
     except (requests.exceptions.HTTPError, KeyError):
         help_message = "!!! There is no such a word"
         return help_message
