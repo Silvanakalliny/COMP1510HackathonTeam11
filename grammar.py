@@ -110,4 +110,5 @@ def check_answer_present_simple(question_source, question, answer):
     return score
 
 
-grammar_test()
+if __name__ == '__main__':
+    grammar_test()
