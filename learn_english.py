@@ -1,4 +1,3 @@
-import requests
 import random
 import re
 import itertools
@@ -10,7 +9,7 @@ import json
 import requests
 
 
-def study_time(func) -> float:
+def study_time(func) -> float:  # DECORATOR
     def wrapper_timer(*args, **kwargs):
         start_time = time.perf_counter()
         func(*args, **kwargs)
