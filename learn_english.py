@@ -86,12 +86,35 @@ def print_list_with_definition(word_list):
         print("%d. %s: %s" % (i, word.title(), definition))
 
 
-def print_lists(a_list):
+def print_lists(a_list) -> list:
+    """
+    format a list in vertical with number assigning to each item
+
+    pattern matching: print out a listed in the vertical format is repeated
+    automating with algorithm: using for loop to print out each item in a list
+    :param a_list: a list
+    precondition: must be a list
+    postcondition: enumerates the list and print the list vertically
+    :return: returns a formatted list
+
+    """
+    # enumerate through a list of items and number them
     for i, items in enumerate(a_list, 1):
         print("%d. %s" % (i, items))
 
 
 def user_input(item_list, result, input_string) -> str:
+    """
+    Prints in the format of dotted line, a message, the item list and returns a prompt
+
+    pattern matching: use pattern matching for multiple print statement is in the same format
+    :param item_list: a list
+    :param result: a string that informs the user
+    :param input_string: a string for prompting the user
+    :return: return input_string as a prompt
+    """
+
+    # Dotted line for separating each print
     print("\n" + "-" * 50)
     print("\n%s\n" % result)
     print_lists(item_list)
