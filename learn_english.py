@@ -47,15 +47,23 @@ def main():
         elif choice == "2":
             new_word = input("Add a new word: ")
             vocabulary.add_a_word(new_word)
+            if new_word.strip() == "":
+                print("Error. Your word only contains whitespace.")
         elif choice == "3":
             new_words = input("Add new words (separate by commas): ")
             vocabulary.add_words(new_words)
         elif choice == "4":
-            delete_word = input("Remove a word: ")
-            vocabulary.remove_a_word(delete_word)
+            try:
+                delete_word = input("Remove a word: ")
+                vocabulary.remove_a_word(delete_word)
+            except KeyError:
+                print("Error: That word is not in the vocabulary.")
         elif choice == "5":
-            words = input("Enter the words you would like to remove (separate by commas): ")
-            vocabulary.remove_words(words)
+            try:
+                words = input("Enter the words you would like to remove (separate by commas): ")
+                vocabulary.remove_words(words)
+            except KeyError:
+                print("Error: One or more of your words are not in the vocabulary.")
         elif choice == "6":
             if len(vocabulary.sort_words()) == 0:
                 print("\nYour list is empty! Add some words to your list first!")
@@ -77,23 +85,41 @@ def main():
             grammar_test()
 
 
-def print_list_with_definition(word_list: list):
-    app_id = "a102c50a"
-    api_key = "02d554c4537100778aa8e303c11c438a"
-    for i, word in enumerate(word_list, 1):
-        url = f"https://od-api.oxforddictionaries.com/api/v2/entries/en/{word}"
-        response = requests.get(url, headers={"app_id": app_id, "app_key": api_key})
-        word_data = json.loads(response.text)
-        definition = word_data["results"][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
-        print("%d. %s: %s" % (i, word.title(), definition))
+def print_list_with_definition(word_list):
+    word_and_definition = {word: definition_and_example(word)[0] for word in word_list}
+    for num, (word, definition) in enumerate(word_and_definition.items(), 1):
+        print("%d. %s: %s" % (num, word.title(), definition))
 
 
-def print_lists(a_list: list) -> list:
-    for i, items in enumerate(a_list, 1):
-        print("%d. %s" % (i, items))
+def print_lists(a_list):
+    """
+    format a list in vertical with number assigning to each item
+
+    pattern matching: print out a listed in the vertical format is repeated
+    automating with algorithm: using for loop to print out each item in a list
+    :param a_list: a list
+    precondition: must be a list
+    postcondition: enumerates the list and print the list vertically
+    :return: returns a formatted list
+
+    """
+    # enumerate through a list of items and number them
+    for n in range(len(a_list)):
+        print("%d. %s" % (n+1, a_list[n]))
 
 
-def user_input(item_list: list, result: str, input_string: str) -> str:
+def user_input(item_list, result, input_string) -> str:
+    """
+    Prints in the format of dotted line, a message, the item list and returns a prompt
+
+    pattern matching: use pattern matching for multiple print statement is in the same format
+    :param item_list: a list
+    :param result: a string that informs the user
+    :param input_string: a string for prompting the user
+    :return: return input_string as a prompt
+    """
+
+    # Dotted line for separating each print
     print("\n" + "-" * 50)
     print("\n%s\n" % result)
     print_lists(item_list)
@@ -129,7 +155,7 @@ def definition_and_example(word: str) -> tuple or str:
         an_example = access_word_information['examples'][0]['text']
         # Return the definition and the example
         return definition, an_example
-    # Catch the Error if the word does not exist and return a helping message
+    # Catch the Error if the word dose not exist and return a helping message
     except (requests.exceptions.HTTPError, KeyError):
         help_message = "!!! There is no such a word"
         return help_message
@@ -261,3 +287,4 @@ def check_dictionary(user_class: Vocabulary, word: str):
 
 if __name__ == '__main__':
     main()
+
