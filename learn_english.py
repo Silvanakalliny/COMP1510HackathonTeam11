@@ -88,7 +88,7 @@ def print_list_with_definition(word_list):
         print("%d. %s: %s" % (i, word.title(), definition))
 
 
-def print_lists(a_list) -> list:
+def print_lists(a_list):
     """
     format a list in vertical with number assigning to each item
 
@@ -101,8 +101,8 @@ def print_lists(a_list) -> list:
 
     """
     # enumerate through a list of items and number them
-    for i, items in enumerate(a_list, 1):
-        print("%d. %s" % (i, items))
+    for n in range(len(a_list)):
+        print("%d. %s" % (n+1, a_list[n]))
 
 
 def user_input(item_list, result, input_string) -> str:
