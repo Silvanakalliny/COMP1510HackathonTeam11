@@ -2,12 +2,80 @@ import requests
 import random
 import re
 import itertools
-import vocabulary
+from vocabulary import Vocabulary
 import doctest
+import time
 
 
+def study_time(func) -> float:
+    def wrapper_timer(*args, **kwargs):
+        start_time = time.perf_counter()
+        func(*args, **kwargs)
+        end_time = time.perf_counter()
+        run_time = end_time - start_time
+        hours = int(run_time // 3600)
+        minutes = int(run_time % 3600 // 60)
+        seconds = int(run_time % 3600 % 60)
+        print(f"You studied for {hours} hours, {minutes} minutes and {seconds} seconds.")
+        return run_time  # removed {func.__name__!r} from above, may use it later to state lesson name or something
+    return wrapper_timer
+
+
+@study_time
 def main():
-    pass
+    vocabulary = Vocabulary()
+
+    running = True
+    while running:
+        menu_list = ["Check a word", "Add a word", "Add words",
+                     "Remove a word", "Remove words",
+                     "Print the word list", "Print the word list with definition",
+                     "Test your vocabulary"]
+
+        choice = user_input(menu_list,
+                            "Welcome to Learn English App!",
+                            "What would you like to do (Type 'quit' to exit the application): ")
+
+        if choice == "quit":
+            running = False
+        elif choice == "1":
+            pass
+        elif choice == "2":
+            add_word = input("Add a new word: ")
+            vocabulary.add_a_word(add_word)
+        elif choice == "3":
+            pass
+        elif choice == "4":
+            delete_word = input("Remove a word: ")
+            vocabulary.remove_a_word(delete_word)
+        elif choice == "5":
+            pass
+        elif choice == "6":
+            if len(vocabulary.sort_words()) == 0:
+                print("\nYour list is empty! Add some words to your list first!")
+            else:
+                print("\nHere is your word list")
+                print_list(vocabulary.sort_words())
+            pass
+        elif choice == "7":
+            pass
+        elif choice == "8":
+            try:
+                test_yourself(vocabulary)
+            except IndexError:
+                print("The question list is Empty")
+
+
+def print_list(a_list):
+    for i, items in enumerate(a_list, 1):
+        print("%d. %s" % (i, items))
+
+
+def user_input(item_list, result, input_string) -> str:
+    print("\n" + "-" * 50)
+    print("\n%s\n" % result)
+    print_list(item_list)
+    return input("\n%s" % input_string)
 
 
 def definition_and_example(word: str) -> tuple or str:
@@ -45,7 +113,7 @@ def definition_and_example(word: str) -> tuple or str:
         return help_message
 
 
-def test_yourself(user_class: vocabulary):
+def test_yourself(user_class: Vocabulary):
     """
     Test the user with his or her vocabulary
 
@@ -61,7 +129,7 @@ def test_yourself(user_class: vocabulary):
     # Make a counter of the number of question
     number_of_question = itertools.count(1)
     # Make a new list of vocabulary sheet as the question list
-    question_list = [user_class.sort_words()]
+    question_list = user_class.sort_words()
     # Keep looping until the user stops the test
     while True:
         # Print the definition and an example of the a random word and return the word
@@ -109,7 +177,7 @@ def print_word_information(question_list: list, question_number: int) -> str:
     return the_word
 
 
-def regex_check(word: str, user_input: str) -> bool:
+def regex_check(word: str, answer: str) -> bool:
     """
     Check if the answer is correct.
 
@@ -117,7 +185,7 @@ def regex_check(word: str, user_input: str) -> bool:
     :precondition: both parameters must be strings
     :postcondition: Check if the user input matches the word
     :param word: must be a string
-    :param user_input: must be a string
+    :param answer: must be a string
     :raise TypeError: if any of both parameters are not a string
     :return: True if matches else False
 
@@ -134,6 +202,9 @@ def regex_check(word: str, user_input: str) -> bool:
     """
     # Check the answer with regular expression
     regex_word = re.compile(f"^{word}$")
-    match_word = regex_word.search(user_input)
+    match_word = regex_word.search(answer)
     # Return True if the answer is correct else False
     return True if match_word else False
+
+
+main()
