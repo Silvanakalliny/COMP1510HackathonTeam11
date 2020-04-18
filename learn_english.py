@@ -75,7 +75,7 @@ def user_input(item_list, result, input_string) -> str:
     print("\n" + "-" * 50)
     print("\n%s\n" % result)
     print_list(item_list)
-    return input("\n%s" % input_string)
+    return input("\n%s" % input_string).strip()
 
 
 def definition_and_example(word: str) -> tuple or str:
