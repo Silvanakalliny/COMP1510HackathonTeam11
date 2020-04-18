@@ -55,7 +55,9 @@ def main():
         elif choice == "7":
             pass
         elif choice == "8":
-            print("Invalid Choice!")
+            pass
+        else:
+            print("Invalid Choice!\n")
 
 
 def print_list(a_list):
@@ -67,7 +69,7 @@ def user_input(item_list, result, input_string) -> str:
     print("\n" + "-" * 50)
     print("\n%s\n" % result)
     print_list(item_list)
-    return input("\n%s" % input_string)
+    return input("\n%s" % input_string).strip()
 
 
 main()
