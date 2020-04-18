@@ -78,14 +78,9 @@ def main():
 
 
 def print_list_with_definition(word_list):
-    app_id = "a102c50a"
-    api_key = "02d554c4537100778aa8e303c11c438a"
-    for i, word in enumerate(word_list, 1):
-        url = f"https://od-api.oxforddictionaries.com/api/v2/entries/en/{word}"
-        response = requests.get(url, headers={"app_id": app_id, "app_key": api_key})
-        word_data = json.loads(response.text)
-        definition = word_data["results"][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
-        print("%d. %s: %s" % (i, word.title(), definition))
+    word_and_definition = {word: definition_and_example(word)[0] for word in word_list}
+    for num, (word, definition) in enumerate(word_and_definition.items(), 1):
+        print("%d. %s: %s" % (num, word.title(), definition))
 
 
 def print_lists(a_list):
@@ -284,3 +279,4 @@ def check_dictionary(user_class: Vocabulary, word: str):
 
 if __name__ == '__main__':
     main()
+
