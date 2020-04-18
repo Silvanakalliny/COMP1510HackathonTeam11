@@ -24,8 +24,7 @@ def grammar_questions() -> dict:  # DATA STRUCTURES = DICTIONARY
                                                    "department. My boss is swedish and it's very interesting.":
                                                    "swedish", "Is that your mercedes in the car park? I have a small"
                                                    "Japanese car. I can't remember its name.": "mercedes",
-                                                   "My sister studies history at college and wants to work in a museum."
-                                                   : "history"}},
+                                                   "My sister studies history at college and wants to work in a museum.": "history"}},
                         "verbs": {"description": "Decide whether the verb conjugation in the following sentences is " +
                                                  "correct or incorrect by entering 1 or 2.",
                                                  "questions": {"I came to see if you are tired.": "Correct", "She wants"
@@ -35,16 +34,14 @@ def grammar_questions() -> dict:  # DATA STRUCTURES = DICTIONARY
                                                                "My sister convinced me to give up smoking.": "Correct",
                                                                "Would you like dancing to this next song?": "Incorrect",
                                                                "Your aunt should eat less sugary foods.": "Correct",
-                                                               "The President decided explaining his decision on TV."
-                                                               : "Incorrect"}},
+                                                               "The President decided explaining his decision on TV.": "Incorrect"}},
                         "present simple mc": {"description": "Choose the option that completes the sentence in a " +
                                                              "grammatically correct way by entering the corresponding" +
                                                              " number.",
                                                              "questions": {"She ________ in Florida but prefers " +
                                                                            "California.": ["lives", ("lives", "goes",
                                                                                                      "arrives")],
-                                                                           "When we ________ on vacation, we never fly."
-                                                                           : ["go", ("are", "go", "went")],
+                                                                           "When we ________ on vacation, we never fly.": ["go", ("are", "go", "went")],
                                                                            "I ________ four languages, but I love " +
                                                                            "Italian the most.": ["speak", ("talk",
                                                                                                            "speak",
@@ -60,13 +57,8 @@ def grammar_questions() -> dict:  # DATA STRUCTURES = DICTIONARY
                                                                            "there's a horror movie on TV.":
                                                                                ["closes", ("open", "shut", "closes")],
                                                                            "Kathy always ________ about the boss. She" +
-                                                                           "hates her job!"
-                                                                           : ["complains", ("says", "tells",
-                                                                                            "complains")],
-                                                                           "She ________ to disco music, only tango."
-                                                                           : ["doesn't dance", ("no listen",
-                                                                                                "doesn't like",
-                                                                                                "doesn't dance")]}}}
+                                                                           "hates her job!": ["complains", ("says", "tells", "complains")],
+                                                                           "She ________ to disco music, only tango.": ["doesn't dance", ("no listen", "doesn't like", "doesn't dance")]}}}
     return question_options
 
 
