@@ -1,7 +1,21 @@
 """Module containing Vocabulary class and related-functions."""
 
 
-def word_lister(string):
+def word_lister(string: str) -> list:
+    """
+    split a string into list.
+
+    :precondition: must be a string
+    :postcondition: split the string into list
+    :raise TypeError: if the string is not a string
+    :param string: must be a string
+    :return: a list of string
+
+    >>> word_lister('my,name,is,saida')
+    ['my', 'name', 'is', 'saida']
+    >>> word_lister('my name,is,saida')
+    ['my name', 'is', 'saida']
+    """
     string = string.lower()
     word_list = string.split(",")
     for word in word_list:
@@ -10,7 +24,7 @@ def word_lister(string):
     return word_list
 
 
-def is_valid_word(string: str):
+def is_valid_word(string: str) -> bool:
     """
     Remove all characters from a string except Latin letters and whitespace.
 
