@@ -30,6 +30,11 @@ def study_time(func) -> float:  # DECORATOR
 
 @study_time
 def main():
+    """
+    Drives the program.
+
+    """
+
     vocabulary = Vocabulary()
 
     running = True
